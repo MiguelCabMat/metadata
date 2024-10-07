@@ -3,6 +3,7 @@ import { BrowserRouter } from "react-router-dom";
 import { useState } from "react";
 import Header from "./Components/Header/Header";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Home from "./Components/Home/Home";
 
 function App() {
   const [movies, setMovies] = useState<any[]>([]);
@@ -13,7 +14,9 @@ function App() {
   return (
     <BrowserRouter>
       <Header onSearchResults={handleSearchResults} />
-      <div className="container p-5"></div>
+      <div className="container p-5">
+        <Home movies={movies} onSearchResults={handleSearchResults} />
+      </div>
     </BrowserRouter>
   );
 }
