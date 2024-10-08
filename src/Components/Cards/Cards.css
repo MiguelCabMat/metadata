@@ -5,3 +5,7 @@
   color: white;
   cursor: pointer;
 }
+
+.fav-heart.favorite{
+  color: rgb(221, 78, 78) !important;
+}

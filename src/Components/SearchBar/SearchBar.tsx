@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { fetchData } from "../../Services/Api/apiConnection";
+import { useNavigate } from "react-router-dom";
 
 interface SearchBarProps {
   onSearch: (result: any[]) => void;
@@ -11,6 +12,7 @@ interface SearchBarProps {
 
 const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
   const [query, setQuery] = useState("");
+  const navigate = useNavigate();
 
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,6 +26,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
 
       if (response.Response === "True") {
         onSearch(response.Search);
+        navigate("/");
       } else {
         onSearch([]);
         console.error("Error:", response.Error);

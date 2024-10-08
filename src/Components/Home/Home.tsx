@@ -4,6 +4,9 @@ import SearchBar from "../SearchBar/SearchBar";
 import Cards from "../Cards/Cards";
 import "./Home.css";
 import Filter from "./Filter/Filter";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleFavorite } from "../../Store/favoriteSlice";
+import { RootState } from "../../Store/store";
 
 interface HomeProps {
   movies: any[];
@@ -12,6 +15,10 @@ interface HomeProps {
 
 const Home: React.FC<HomeProps> = ({ movies, onSearchResults }) => {
   const [selectedType, setSelectedType] = useState<string>("movie");
+  const dispatch = useDispatch();
+  const favoriteMovies = useSelector(
+    (state: RootState) => state.favorites.favoriteMovies
+  );
 
   const handleTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedType(e.target.value);
@@ -38,17 +45,35 @@ const Home: React.FC<HomeProps> = ({ movies, onSearchResults }) => {
     );
   }
 
+  const handleFavoriteToggle = (movie: any) => {
+    dispatch(toggleFavorite(movie));
+  };
+
   return (
     <>
       <Filter selectedType={selectedType} handleTypeChange={handleTypeChange} />
       <div className="row mt-5">
         <p className="text-muted">
-          Mostrando <span className="text-danger font-weight-bold">{filteredMovies.length}</span> 
+          Mostrando{" "}
+          <span className="text-danger font-weight-bold">
+            {filteredMovies.length}
+          </span>
           {selectedType === "movie" ? " película(s)" : " serie(s)"}
         </p>
       </div>
       {filteredMovies
-        .map((movie, i) => <Cards key={movie.imdbID} movie={movie}/>)
+        .map((movie) => {
+          const isFavorite = favoriteMovies.some((favMovie) => favMovie.imdbID === movie.imdbID);
+
+          return (
+            <Cards
+              key={movie.imdbID}
+              movie={movie}
+              onFavoriteToggle={handleFavoriteToggle}
+              isFavorite={isFavorite}
+            />
+          );
+        })
         .reduce<any[]>((rows, card, index) => {
           if (index % 4 === 0) rows.push([]);
           rows[rows.length - 1].push(card);
