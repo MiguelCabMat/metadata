@@ -26,6 +26,12 @@ function App() {
           />
           <Route path="/favoritos" element={<Favorites />} />
           <Route path="/movie" element={<Movie />} />
+          <Route
+            path="/*"
+            element={
+              <Home movies={movies} onSearchResults={handleSearchResults} />
+            }
+          />
         </Routes>
       </div>
     </BrowserRouter>
