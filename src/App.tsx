@@ -5,6 +5,7 @@ import Header from "./Components/Header/Header";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Home from "./Components/Home/Home";
 import Favorites from "./Components/Favorites/Favorites";
+import Movie from "./Components/Movie/Movie";
 
 function App() {
   const [movies, setMovies] = useState<any[]>([]);
@@ -24,6 +25,7 @@ function App() {
             }
           />
           <Route path="/favoritos" element={<Favorites />} />
+          <Route path="/movie" element={<Movie />} />
         </Routes>
       </div>
     </BrowserRouter>
