@@ -6,15 +6,28 @@ import "./Cards.css";
 
 interface CardProps {
   movie: any;
+  isFavorite: boolean;
+  onFavoriteToggle: (movie: any) => void;
 }
 
-const Cards: React.FC<CardProps> = ({ movie }) => {
+const Cards: React.FC<CardProps> = ({
+  movie,
+  isFavorite,
+  onFavoriteToggle,
+}) => {
   return (
     <div className="col-3 position-relative">
       <Card key={movie.imdbID} className="h-100">
-        <Card.Img variant="top" src={movie.Poster} alt={movie.Title} />
+        <Card.Img
+          variant="top"
+          src={movie.Poster || "../../Assets/images/poster_template.png"}
+          alt={movie.Title}
+        />
         <div className="position-absolute">
-          <BsFillHeartFill className="fav-heart" />
+          <BsFillHeartFill
+            className={`fav-heart ${isFavorite ? "favorite" : ""}`}
+            onClick={() => onFavoriteToggle(movie)}
+          />
         </div>
         <Card.Body>
           <Card.Title>{movie.Title}</Card.Title>

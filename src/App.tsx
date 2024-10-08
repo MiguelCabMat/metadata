@@ -1,9 +1,10 @@
 import "./App.css";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useState } from "react";
 import Header from "./Components/Header/Header";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Home from "./Components/Home/Home";
+import Favorites from "./Components/Favorites/Favorites";
 
 function App() {
   const [movies, setMovies] = useState<any[]>([]);
@@ -15,7 +16,15 @@ function App() {
     <BrowserRouter>
       <Header onSearchResults={handleSearchResults} />
       <div className="container p-5">
-        <Home movies={movies} onSearchResults={handleSearchResults} />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Home movies={movies} onSearchResults={handleSearchResults} />
+            }
+          />
+          <Route path="/favoritos" element={<Favorites />} />
+        </Routes>
       </div>
     </BrowserRouter>
   );
