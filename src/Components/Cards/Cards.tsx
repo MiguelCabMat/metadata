@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { AiFillCaretRight } from "react-icons/ai";
 import { BsFillHeartFill } from "react-icons/bs";
 import "./Cards.css";
+import { useNavigate } from "react-router-dom";
 
 interface CardProps {
   movie: any;
@@ -15,6 +16,8 @@ const Cards: React.FC<CardProps> = ({
   isFavorite,
   onFavoriteToggle,
 }) => {
+  const navigate = useNavigate();
+
   return (
     <div className="col-3 position-relative">
       <Card key={movie.imdbID} className="h-100">
@@ -22,6 +25,7 @@ const Cards: React.FC<CardProps> = ({
           variant="top"
           src={movie.Poster || "../../Assets/images/poster_template.png"}
           alt={movie.Title}
+          onClick={() => navigate(`/movie?id=${movie.imdbID}`)}
         />
         <div className="position-absolute">
           <BsFillHeartFill

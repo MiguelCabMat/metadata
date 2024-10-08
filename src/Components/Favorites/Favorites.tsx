@@ -15,6 +15,15 @@ const Favorites: React.FC = () => {
 
   return (
     <div className="container">
+      <div className="row mt-5">
+        <p className="text-muted">
+          Mostrando{" "}
+          <span className="text-danger font-weight-bold">
+            {favoriteMovies.length}
+          </span>{" "}
+          favoritos
+        </p>
+      </div>
       <h2>Favoritos</h2>
       {favoriteMovies.length === 0 ? (
         <p>No tienes películas favoritas aún.</p>

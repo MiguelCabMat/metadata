@@ -6,6 +6,10 @@
   cursor: pointer;
 }
 
-.fav-heart.favorite{
+.fav-heart.favorite {
   color: rgb(221, 78, 78) !important;
+}
+
+.card-img-top {
+  cursor: pointer;
 }
