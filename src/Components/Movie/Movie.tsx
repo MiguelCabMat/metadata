@@ -3,6 +3,7 @@ import { fetchData } from "../../Services/Api/apiConnection";
 import Spinner from "react-bootstrap/Spinner";
 import { Card, Row, Col } from "react-bootstrap";
 import { BsFillStarFill } from "react-icons/bs";
+import "./Movie.css";
 
 interface MovieData {
   Title: string;
@@ -84,7 +85,9 @@ const Movie: React.FC = () => {
             <Card.Body className="h-100">
               <Card.Title>
                 {movie.Title}{" "}
-                <span className="text-muted small">{movie.Rated}</span>
+                <span className={`text-muted small ${movie.Rated}`}>
+                  {movie.Rated}
+                </span>
               </Card.Title>
               <Card.Subtitle className="mb-2 text-muted">
                 {movie.Year}
